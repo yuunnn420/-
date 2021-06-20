@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import javafx.event.EventHandler;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -61,7 +62,7 @@ public class Controller extends Thread {
     int[][] click = new int[size][size];
     Button[][] button = new Button[size][size];
     ImageView[][] imageView = new ImageView[size][size];
-    Image zeroImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/Eevee.png")), tube, tube, false, false);
+    Image zeroImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/white.png")), tube, tube, false, false);
     Image firstImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/Flareon.png")), tube, tube, false, false);
     Image secondImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/Vaporeon.png")), tube, tube, false, false);
     Image thirdImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/Jolteon.png")), tube, tube, false, false);
@@ -116,30 +117,24 @@ public class Controller extends Thread {
             }
     }*/
     boolean isChange = false;
-    /*int count3 = 0;
-
+    int count3 = 0;
+    int c=0;
     public void anime(){
         Timeline timeline = new Timeline();
-        KeyFrame kf = new KeyFrame(Duration.millis(2000), new EventHandler<>() {
+        KeyFrame kf = new KeyFrame(Duration.millis(1000), new EventHandler<>() {
             @Override
             public void handle(ActionEvent event) {
-                    drawMap3();
-                    if(count3==2){
-                        count3=0;
+                    drawMap3(c);
+                    c+=1;
+                    /*if(c==count3){
                         timeline.stop();
-                    }
+                        drawMap2();
+                    }*/
             }
         });
         timeline.getKeyFrames().add(kf);
-        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.setCycleCount(count3-1);
         timeline.play();
-    }*/
-    int ia,ja;
-    int getIA(){
-        return ia;
-    }
-    int getJA(){
-        return ja;
     }
     public void animation () {
         flag = true;
@@ -212,27 +207,6 @@ public class Controller extends Thread {
                 map2[i2][j2] = t;
             }
         }
-        /*//map3=map2
-        for (int i = 0; i < size; i++) {//h
-            for (int j = 0; j < size; j++) {//w
-                map3[count3][i][j] = map2[i][j];
-            }
-        }
-        System.out.println("map3 "+count3);
-        for (int i = 0; i < size; i++) {//h
-            for (int j = 0; j < size; j++) {//w
-                System.out.print(map3[count3][i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();
-        count3+=1;*/
-        /*drawMap2();
-        for (int i = 0; i < size; i++) {//h
-            for (int j = 0; j < size; j++) {//w
-                map[i][j] = map2[i][j];
-            }
-        }*/
         if (flag==false){
             for (int j = 0; j < size; j++) {//w
                 for (int i = size-1; i >= 0; i--) {//h
@@ -240,44 +214,14 @@ public class Controller extends Thread {
                         x = i;
                         y = j;
                         isZero();
-                        //System.out.println(x);
                         if (x != -1) {
                             map2[i][j] = map2[x][y];
                             map2[x][y] = 0;
-                        /*this.ia=i;
-                        this.ja=j;
-                        Timeline t = new Timeline();
-                        KeyFrame kf = new KeyFrame(Duration.millis(2000), new EventHandler<>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                int i=getIA();
-                                int j=getIA();
-                                GridPane.setConstraints(imageView[x][y], j, x-1);
-                                //gridpane.getChildren().add(imageView[x][y]);
-                                if(x==i){
-                                    t.stop();
-                                }
-                            }
-                        });
-                        t.getKeyFrames().add(kf);
-                        t.setCycleCount(Timeline.INDEFINITE);
-                        t.play();*/
                         }
                     }
                 }
             }
-        /*try {
-            this.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        drawMap2();
-        for (int i = 0; i < size; i++) {//h
-            for (int j = 0; j < size; j++) {//w
-                map[i][j] = map2[i][j];
-            }
-        }*/
-        /*//map3=map2
+        //map3=map2
         for (int i = 0; i < size; i++) {//h
             for (int j = 0; j < size; j++) {//w
                 map3[count3][i][j] = map2[i][j];
@@ -291,7 +235,8 @@ public class Controller extends Thread {
             System.out.println();
         }
         System.out.println();
-        count3+=1;*/
+        count3+=1;
+            //drawMap2();
             for (int i = 0; i < map.length; i++) {//h
                 for (int j = 0; j < map[0].length; j++) {//w
                     if (map2[i][j] == 0) {
@@ -299,14 +244,22 @@ public class Controller extends Thread {
                     }
                 }
             }
+            for (int i = 0; i < size; i++) {//h
+                for (int j = 0; j < size; j++) {//w
+                    map3[count3][i][j] = map2[i][j];
+                }
+            }
+            System.out.println("map3 "+count3);
+            for (int i = 0; i < size; i++) {//h
+                for (int j = 0; j < size; j++) {//w
+                    System.out.print(map3[count3][i][j]);
+                }
+                System.out.println();
+            }
+            System.out.println();
+            count3+=1;
             printMap2();
-        /*try {
-            this.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-            //anime();
-            drawMap2();
+            //drawMap2();
             for (int i = 0; i < size; i++) {//h
                 for (int j = 0; j < size; j++) {//w
                     map[i][j] = map2[i][j];
@@ -314,8 +267,16 @@ public class Controller extends Thread {
             }
             animation();
         }
+        anime();
     }
     public boolean change () {
+        if (clickTimes == 2) {
+            for(int i=0;i<size;i++){
+                for(int j=0;j<size;j++){
+                    button[i][j].setStyle("-fx-background-color: transparent ;-fx-border-color: white;");
+                }
+            }
+        }
         for (int i = 0; i < map.length; i++) {//h
             for (int j = 0; j < map[0].length - 1; j++) {//w
                 if (click[i][j] == 1 && click[i][j + 1] == 1) {
@@ -358,8 +319,8 @@ public class Controller extends Thread {
         return false;
     }
     public void action () {
-        for (int i = 0; i < map.length; i++) {//h
-            for (int j = 0; j < map[0].length; j++) {//w
+        for (int i = 0; i < size; i++) {//h
+            for (int j = 0; j < size; j++) {//w
                 this.i = i;
                 this.j = j;
                 button[i][j].setOnAction(new EventHandler<ActionEvent>() {
@@ -367,6 +328,7 @@ public class Controller extends Thread {
                     int j = getJ();
                     @Override
                     public void handle(ActionEvent e) {
+                        button[i][j].setStyle("-fx-background-color: transparent ;-fx-border-color: blue;");
                         System.out.println(i + " " + j);
                         click[i][j] = 1;
                         clickTimes += 1;
@@ -426,7 +388,7 @@ public class Controller extends Thread {
                 button[i][j] = new Button();
                 button[i][j].setPrefSize(tube, tube);
                 gridpane.add(button[i][j], j, i);
-                button[i][j].setStyle("-fx-background-color: rgba(255, 255, 255, .5);");
+                button[i][j].setStyle("-fx-background-color: transparent ;-fx-border-color: white;");//rgba(255, 255, 255, .5)
             }
         }
         animation();
@@ -462,83 +424,46 @@ public class Controller extends Thread {
                     }
                     GridPane.setConstraints(imageView[i][j], j, i);
                     gridpane.getChildren().add(imageView[i][j]);
-                    button[i][j] = new Button();
-                    button[i][j].setPrefSize(tube, tube);
                     gridpane.add(button[i][j], j, i);
-                    button[i][j].setStyle("-fx-background-color: rgba(255, 255, 255, .5);");
-                    this.i = i;
-                    this.j = j;
-                    button[i][j].setOnAction(new EventHandler<ActionEvent>() {
-                        int i = getI();
-                        int j = getJ();
-                        @Override
-                        public void handle(ActionEvent e) {
-                            System.out.println(i + " " + j);
-                            click[i][j] = 1;
-                            clickTimes += 1;
-                            if (change()) {
-                                animation();
-                            }
-                        }
-                    });
-                }
-           // }
+                //}
+            }
         }
     }
-
-    /*public synchronized void drawMap3 () {
+    public synchronized void drawMap3 (int c) {
         for (int i = 0; i < map.length; i++) {//h
             for (int j = 0; j < map[0].length; j++) {//w
-                //if (map3[count3][i][j] != map[i][j]) {
-                    gridpane.getChildren().remove(imageView[i][j]);
-                    gridpane.getChildren().remove(button[i][j]);
-                    switch (map3[count3][i][j]) {
-                        /*case 0:
-                            imageView[i][j] = new ImageView(zeroImage);
-                            break;
-                        case 1:
-                            imageView[i][j] = new ImageView(firstImage);
-                            break;
-                        case 2:
-                            imageView[i][j] = new ImageView(secondImage);
-                            break;
-                        case 3:
-                            imageView[i][j] = new ImageView(thirdImage);
-                            break;
-                        case 4:
-                            imageView[i][j] = new ImageView(fourthImage);
-                            break;
-                        case 5:
-                            imageView[i][j] = new ImageView(fifthImage);
-                            break;
-                        default:
-                            break;
-                    }
-                    GridPane.setConstraints(imageView[i][j], j, i);
-                    gridpane.getChildren().add(imageView[i][j]);
-                    button[i][j] = new Button();
-                    button[i][j].setPrefSize(tube, tube);
-                    gridpane.add(button[i][j], j, i);
-                    button[i][j].setStyle("-fx-background-color: transparent;");
-                    this.i = i;
-                    this.j = j;
-                    button[i][j].setOnAction(new EventHandler<ActionEvent>() {
-                        int i = getI();
-                        int j = getJ();
-                        @Override
-                        public void handle(ActionEvent e) {
-                            System.out.println(i + " " + j);
-                            click[i][j] = 1;
-                            clickTimes += 1;
-                            if (change()) {
-                                animation();
-                            }
-                        }
-                    });
+                //if (map2[i][j] != map[i][j]) {
+                gridpane.getChildren().remove(imageView[i][j]);
+                gridpane.getChildren().remove(button[i][j]);
+                switch (map3[c][i][j]) {
+                    case 0:
+                        imageView[i][j] = new ImageView(zeroImage);
+                        break;
+                    case 1:
+                        imageView[i][j] = new ImageView(firstImage);
+                        break;
+                    case 2:
+                        imageView[i][j] = new ImageView(secondImage);
+                        break;
+                    case 3:
+                        imageView[i][j] = new ImageView(thirdImage);
+                        break;
+                    case 4:
+                        imageView[i][j] = new ImageView(fourthImage);
+                        break;
+                    case 5:
+                        imageView[i][j] = new ImageView(fifthImage);
+                        break;
+                    default:
+                        break;
                 }
-           // }
+                GridPane.setConstraints(imageView[i][j], j, i);
+                gridpane.getChildren().add(imageView[i][j]);
+                gridpane.add(button[i][j], j, i);
+                //}
+            }
         }
-    }*/
+    }
 }
 
 /*@Override
