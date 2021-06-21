@@ -1,22 +1,22 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root = loader.load();
-        Controller controller = loader.getController();
-        controller.start();
-        controller.drawMap();
-        stage.setTitle("zzzzzzzzz");
+        MenuController controller = loader.getController();
+        controller.setMenu();
+        stage.setTitle("Eeveelution");
         Scene scene = new Scene(root);
+        controller.setPrevStage(stage);
         stage.setScene(scene);
         stage.show();
     }
