@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,7 +13,7 @@ public class Main extends Application {
         Parent root = loader.load();
         MenuController controller = loader.getController();
         controller.setMenu();
-        stage.setTitle("Eeveelution");
+        stage.setTitle("EEVEELUTION");
         Scene scene = new Scene(root);
         controller.setPrevStage(stage);
         stage.setScene(scene);
